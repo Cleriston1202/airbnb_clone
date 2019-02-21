@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>AirBnb</title>
+</head>
+
+<body>
+
+
+
+    <div id="container"></div>
+
+
+    <script>
+        const url = 'http://airbnb.douglasmaia.com/api/properties'
+        fetch(url)
+            .then(resp => resp.json())
+            .then(result => {
+                let itens = result.reduce(
+                    (html, res) => html + `<div class="card">
+                    <img src="${res.photo}"/>
+                    <div class="card-info">
+                        <p> ${res.name}</p>
+                    </div>
+                    <div class="card-preco">
+                    <span class="preco-por"> R$: ${res.price}</span>
+                    </div>
+                    </div>`, ''
+                )
+                const div = document.querySelector("#container")
+                div.innerHTML = itens
+                    //document.body.insertAdjacentHTML('beforeend', `<div >${itens}</div>`)
+            })
+    </script>
+
+</body>
+
+</html>
